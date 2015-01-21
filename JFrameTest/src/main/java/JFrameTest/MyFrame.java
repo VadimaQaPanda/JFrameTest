@@ -1,93 +1,125 @@
 package JFrameTest;
 
 
-//Импортируем нужные пространства имен.
+//Import the necessary namespaces
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.plaf.basic.*;
-
-import org.w3c.dom.Text;
 
 
-//Класс основного окна программы.
+
+//Class of the main program window
 public class MyFrame extends JFrame {
 
 	JTextField testName, jTextField1;
-	private Text       textBox;
-	
-	// Переменная для кнопки.
-	public JButton button;
-	// Конструктор.
+	JLabel xmlLabel;
+	String xmlHtml;
+	TextArea textArea;
+	JButton buttonAllSitesAndLocations;
+
+	//designer
 	public MyFrame(){
-		// Задаем действие,
-		// выполняемое при выходе из программы.
+		//Specifies the action to take when you exit the program
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		// Устанавливаем размеры и расположение.
+		//Sets the size and location.
 		setLocation(750, 350);
 		setSize(500, 500);
 		setTitle("Title");
-		// Задаем контейнер для компонентов.
-//		Container con = getContentPane();
-//		con.setLayout(new FlowLayout());
+		//Ask a container for components.
 		JPanel panel = new JPanel();
-	    panel.setLayout(null);
+		panel.setLayout(null);
+
+		// JLabel
+		xmlHtml = "<html><font color=\'#800080\' size=\'2\' face=\'Verdana\'>&lt;?xml version='1.0' encoding='UTF-8'?></font></html>";
+		xmlLabel = new JLabel(xmlHtml);
+		xmlLabel.setBounds(10, 10, 400, 10);
+		panel.add(xmlLabel);
+
+		xmlHtml = "<html><font color=\'#800080\' size=\'2\' face=\'Verdana\'>&lt;!DOCTYPE suite SYSTEM 'http://testng.org/testng-1.0.dtd'></font></html>";
+		xmlLabel = new JLabel(xmlHtml);
+		xmlLabel.setBounds(10, 20, 400, 10);
+		panel.add(xmlLabel);
+
+		xmlHtml = "<html><font color=\'#800080\' size=\'2\' face=\'Verdana\'>&lt;suite name='Test' parallel='tests' thread-count='1'></font></html>";
+		xmlLabel = new JLabel(xmlHtml);
+		xmlLabel.setBounds(10, 30, 400, 10);
+		panel.add(xmlLabel);
+
+		xmlHtml = "<html><font color=\'#800080\' size=\'2\' face=\'Verdana\'>&lt;test name='Test'></font></html>";
+		xmlLabel = new JLabel(xmlHtml);
+		xmlLabel.setBounds(10, 50, 400, 10);
+		panel.add(xmlLabel);
+
+		// textArea
+		String textAreaString = "<parameter name='site' value='UPFORIT'/>\n"
+				+"<classes>\n"
+				+"   <class name='phoenix.web.tests.smoke.SmokeRel'>\n"
+				+"      <methods>\n"
+				+"        <include name='checkSuccessfulRegistration' />\n"
+				+"        <include name='checkAutologinFromAdmin' />\n"
+				+"        <include name='checkSuccessfulConfirm' />\n"
+				+"      </methods>\n"
+				+"   </class>\n"
+				+"</classes>\n";
+		textArea = new TextArea(textAreaString);
+		textArea.setBounds(10, 60, 400, 200);
+		panel.add(textArea);
+
+		// JLabel
+		xmlHtml = "<html><font color=\'#800080\' size=\'2\' face=\'Verdana\'>&lt;/test></font></html>";
+		xmlLabel = new JLabel(xmlHtml);
+		xmlLabel.setBounds(10, 260, 400, 10);
+		panel.add(xmlLabel);
 
 
-	    // textArea
-	    String textAreaString = "<?xml version='1.0' encoding='UTF-8'?>\n"
-	    +"<!DOCTYPE suite SYSTEM 'http://testng.org/testng-1.0.dtd'>\n"
-	    +"<suite name='Search Chek Web' parallel='tests' thread-count='1'>";
-	    TextArea textAreaDeader = new TextArea(textAreaString);
-	    textAreaDeader.setBounds(10, 10, 400, 75);
-		panel.add(textAreaDeader);
-	    
+
+		/*
+
 	    TextArea textAreaBody = new TextArea(textAreaString);
 	    textAreaBody.setBounds(10, 100, 400, 75);
 		panel.add(textAreaBody);
-		
-		
-/*	
-		// Создание JTextField
+		 */
+
+		/*	
+		//JTextField
 		testName = new JTextField("test name example:");
 		testName.setBounds(10, 30, 300, 100);
-		// Добавление JTextField к контейнеру.
+
 		panel.add(testName);
-		
-		
+
+
 
 		// JLabel
 		JLabel label1 = new JLabel("Test1");
 		label1.setBounds(10, 150, 100, 10);
 		panel.add(label1);
-		
 
-		// Создание JTextField
+
+		//JTextField
 		jTextField1 = new JTextField("example1:", 20);
 		jTextField1.setBounds(10, 200, 300, 100);
-		// Добавление JTextField к контейнеру.
 		panel.add(jTextField1);
 
-		
-		
+
+
 		textArea = new TextArea("Ваш заказ:");
 		textArea.setBounds(10, 300, 300, 100);
 		panel.add(textArea);
-*/
-		
-		// Создание кнопки.
-		button = new JButton("Press me");
-		button.setBounds(10, 400, 100, 25);
-		// Добавление кнопки к контейнеру.
-		panel.add(button);
+		 */
 
-		// Добавление обработчика для кнопки.
-		button.addActionListener(new ActionListener(){
+		//Create a button buttonAllSitesAndLocations.
+		buttonAllSitesAndLocations = new JButton("Create config for all sites and locations");
+		buttonAllSitesAndLocations.setBounds(10, 400, 300, 25);
+		//Add a button to the container.
+		panel.add(buttonAllSitesAndLocations);
+
+		//Adding a handler for the button buttonAllSitesAndLocations.
+		buttonAllSitesAndLocations.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				// Изменение Btn
+				//change Btn
 
-				String testNameString = testName.getText();
-				setTitle(testNameString);
+				String textAreaString = textArea.getText();
+				setTitle(textAreaString);
 				// sleep
 				try {
 					Thread.sleep(3000);
@@ -95,21 +127,21 @@ public class MyFrame extends JFrame {
 					e1.printStackTrace();
 				}
 				// alert
-				JOptionPane.showMessageDialog(null, testNameString+".xml confi mas be created 'config/"+testNameString+".xml");
+				JOptionPane.showMessageDialog(null, "xml confi mas be created 'config/");
 				// close
 				System.exit(getDefaultCloseOperation());
 
 			}
 		});
 
-		
-        getContentPane().add(panel);
-        setPreferredSize(new Dimension(285, 145));
-        
+
+		getContentPane().add(panel);
+		setPreferredSize(new Dimension(285, 145));
+
 	}
 
 	public static void main(String[] args) {
-		// Создание главного окна.
+		//Creating the main window.
 		new MyFrame().setVisible(true);
 	}
 
